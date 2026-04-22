@@ -5,7 +5,14 @@ InterviewAI is a full-stack MERN application that simulates real interview exper
 ---
 
 ## 📸 Screenshots (Optional)
+#Login Screen
 <img width="1920" height="980" alt="image" src="https://github.com/user-attachments/assets/4d65382b-5190-41ab-bec7-3fccd9fd0151" />
+#Candiate Dashboard Screen
+<img width="1920" height="981" alt="image" src="https://github.com/user-attachments/assets/ec7a665c-7bcd-4221-a4f6-40abf1572b7b" />
+#Interview Screen with Ai
+<img width="1920" height="987" alt="image" src="https://github.com/user-attachments/assets/9810bad5-f613-4abd-9cd7-c23b00a6cf66" />
+
+
 
 
 
