@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
-const API = axios.create({ baseURL: process.env.API_CLIENT});
+const API = axios.create({ baseURL: import.meta.env.VITE_API_CLIENT});
+
 API.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
   if (token) config.headers.Authorization = `Bearer ${token}`;

@@ -66,14 +66,16 @@ export default function DashboardPage() {
     }
   };
 
-  const avgScore = history.length
-    ? (history.reduce((s, h) => s + (h.averageScore || 0), 0) / history.length).toFixed(1)
-    : 0;
+const avgScore = Array.isArray(history) && history?.length
+  ? (history?.reduce((s, h) => s + (h.averageScore || 0), 0) / history?.length).toFixed(1)
+  : 0;
+
+// const avgScore = history?.length ? (history?.reduce((s, h) => s + (h.averageScore || 0), 0) / history?.length)?.toFixed(1) : 0;
 
   const stats = [
-    { title: 'Interviews Done', value: history.length, icon: <CheckCircleOutlined />, color: '#6c63ff' },
+    { title: 'Interviews Done', value: history?.length, icon: <CheckCircleOutlined />, color: '#6c63ff' },
     { title: 'Avg Score', value: `${avgScore}/10`, icon: <TrophyOutlined />, color: '#10b981' },
-    { title: 'Available Tests', value: interviews.length, icon: <RocketOutlined />, color: '#f59e0b' },
+    { title: 'Available Tests', value: interviews?.length, icon: <RocketOutlined />, color: '#f59e0b' },
   ];
 
   if (loading) return (
@@ -91,7 +93,7 @@ export default function DashboardPage() {
             <h1 style={styles.greeting}>Good day, {user?.name?.split(' ')[0]} 👋</h1>
             <p style={styles.subtext}>Ready to ace your next interview? Choose a test below.</p>
           </div>
-          {interviews.length === 0 && (
+          {interviews?.length === 0 && (
             <Button
               type="primary" icon={<ThunderboltOutlined />}
               loading={seeding} onClick={seedData}
@@ -125,7 +127,7 @@ export default function DashboardPage() {
       </Row>
 
       {/* Recent Activity */}
-      {history.length > 0 && (
+      {Array.isArray(history)?.length > 0 && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
           <div style={styles.sectionHeader}>
             <h2 style={styles.sectionTitle}>Recent Activity</h2>
@@ -165,10 +167,10 @@ export default function DashboardPage() {
       {/* Interview Cards */}
       <div style={styles.sectionHeader}>
         <h2 style={styles.sectionTitle}>Available Interviews</h2>
-        <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{interviews.length} tests available</span>
+        <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{interviews?.length} tests available</span>
       </div>
 
-      {interviews.length === 0 ? (
+      {Array.isArray(interviews)?.length === 0 ? (
         <div style={styles.emptyBox}>
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -177,7 +179,7 @@ export default function DashboardPage() {
         </div>
       ) : (
         <Row gutter={[16, 16]}>
-          {interviews.map((interview, i) => (
+          {interviews?.map((interview, i) => (
             <Col xs={24} sm={12} lg={8} key={interview._id}>
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}

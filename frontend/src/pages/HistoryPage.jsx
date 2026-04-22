@@ -17,17 +17,29 @@ export default function HistoryPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // API.get('/sessions/history')
+    //   .then(r => { setSessions(r.data); setLoading(false); })
+    //   .catch(() => setLoading(false));
+
     API.get('/sessions/history')
-      .then(r => { setSessions(r.data); setLoading(false); })
-      .catch(() => setLoading(false));
+  .then(r => {
+    setSessions(r.data.data); // ✅ correct
+    setLoading(false);
+  })
+
   }, []);
 
-  const avgScore = sessions.length
-    ? (sessions.reduce((s, h) => s + (h.averageScore || 0), 0) / sessions.length).toFixed(1)
-    : 0;
 
-  const bestScore = sessions.length
-    ? Math.max(...sessions.map(s => s.averageScore || 0))
+  // const avgScore = sessions?.length
+  //   ? (sessions.reduce((s, h) => s + (h.averageScore || 0), 0) / sessions?.length).toFixed(1)
+  //   : 0;
+
+  const avgScore = Array.isArray(sessions) && sessions.length
+  ? (sessions.reduce((s, h) => s + (h.averageScore || 0), 0) / sessions.length).toFixed(1)
+  : 0;
+
+  const bestScore = sessions?.length
+    ? Math?.max(...sessions?.map(s => s.averageScore || 0))
     : 0;
 
   if (loading) return (
@@ -50,7 +62,7 @@ export default function HistoryPage() {
         </div>
       </motion.div>
 
-      {sessions.length === 0 ? (
+      {sessions?.length === 0 ? (
         <div style={styles.emptyWrap}>
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -69,7 +81,7 @@ export default function HistoryPage() {
           {/* Summary Stats */}
           <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
             {[
-              { label: 'Total Interviews', value: sessions.length, icon: <CalendarOutlined />, color: '#6c63ff' },
+              { label: 'Total Interviews', value: sessions?.length, icon: <CalendarOutlined />, color: '#6c63ff' },
               { label: 'Average Score', value: `${avgScore}/10`, icon: <TrophyOutlined />, color: '#10b981' },
               { label: 'Best Score', value: `${bestScore}/10`, icon: <FireOutlined />, color: '#f59e0b' },
             ].map((s, i) => (
@@ -91,7 +103,7 @@ export default function HistoryPage() {
           </Row>
 
           {/* Score trend bar */}
-          {sessions.length >= 2 && (
+          {sessions?.length >= 2 && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
               style={styles.trendCard}>
               <div style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 14, color: 'var(--text-primary)', marginBottom: 14 }}>
@@ -118,7 +130,7 @@ export default function HistoryPage() {
             All Sessions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {sessions.map((s, i) => (
+            {sessions?.map((s, i) => (
               <motion.div
                 key={s._id}
                 initial={{ opacity: 0, x: -20 }}
