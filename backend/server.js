@@ -16,7 +16,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: ["https://ai-interview-t6vs.vercel.app",'http://localhost:5173',process.env.URL],
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
