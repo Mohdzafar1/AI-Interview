@@ -51,19 +51,48 @@ export default function LoginPage() {
 
         <h2 style={styles.formTitle}>Sign in to your account</h2>
 
-        <Form layout="vertical" onFinish={onFinish} size="large">
-          <Form.Item name="email" rules={[{ required: true, type: 'email', message: 'Enter a valid email' }]}>
-            <Input prefix={<MailOutlined style={{ color: 'var(--text-muted)' }} />} placeholder="Email address" />
-          </Form.Item>
-          <Form.Item name="password" rules={[{ required: true, message: 'Enter your password' }]}>
-            <Input.Password prefix={<LockOutlined style={{ color: 'var(--text-muted)' }} />} placeholder="Password" />
-          </Form.Item>
-          <Form.Item style={{ marginBottom: 12 }}>
-            <Button type="primary" htmlType="submit" loading={loading} block icon={<ArrowRightOutlined />} iconPosition="end">
-              Sign In
-            </Button>
-          </Form.Item>
-        </Form>
+     <Form
+  layout="vertical"
+  onFinish={onFinish}
+  size="large"
+  initialValues={{
+    email: "candiate1@gmail.com",
+    password: "123456"
+  }}
+>
+  <Form.Item
+    name="email"
+    rules={[{ required: true, type: 'email', message: 'Enter a valid email' }]}
+  >
+    <Input
+      prefix={<MailOutlined style={{ color: 'var(--text-muted)' }} />}
+      placeholder="Email address"
+    />
+  </Form.Item>
+
+  <Form.Item
+    name="password"
+    rules={[{ required: true, message: 'Enter your password' }]}
+  >
+    <Input.Password
+      prefix={<LockOutlined style={{ color: 'var(--text-muted)' }} />}
+      placeholder="Password"
+    />
+  </Form.Item>
+
+  <Form.Item style={{ marginBottom: 12 }}>
+    <Button
+      type="primary"
+      htmlType="submit"
+      loading={loading}
+      block
+      icon={<ArrowRightOutlined />}
+      iconPosition="end"
+    >
+      Sign In
+    </Button>
+  </Form.Item>
+</Form>
 
         <p style={styles.switchText}>
           Don't have an account?{' '}
